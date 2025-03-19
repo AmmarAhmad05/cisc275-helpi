@@ -34,6 +34,12 @@ function App() {
         <div>
           Ammar Ahmad
         </div>
+        <div>
+        Brendan van Riper
+        </div>
+        <div>
+        Oluwatito Olubakinde
+        </div>
         <a
           className="App-link"
           href="https://reactjs.org"
