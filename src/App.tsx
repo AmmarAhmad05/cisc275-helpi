@@ -40,6 +40,9 @@ function App() {
         <div>
         Oluwatito Olubakinde
         </div>
+        <div>
+          Baseer Sharief
+        </div>
         <a
           className="App-link"
           href="https://reactjs.org"
