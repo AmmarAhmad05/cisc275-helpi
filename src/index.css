@@ -26,8 +26,10 @@ body {
 /* Header speech bubble */
 .speech-container {
   display: flex;
+  justify-content: space-between; /* Align title to the left and nav to the right */
   align-items: center;
   margin-bottom: 20px;
+  padding: 0 20px; /* Add padding for spacing */
 }
 
 .speech-bubble {
@@ -38,6 +40,7 @@ body {
   position: relative;
   font-weight: bold;
   box-shadow: 1px 1px 4px rgba(0,0,0,0.1);
+  margin-right: 20px; /* Add space between the title and navigation */
 }
 
 .speech-bubble::after {
@@ -48,6 +51,9 @@ body {
   transform: translateY(-50%);
   border: 10px solid transparent;
   border-right-color: #f2f2f2;
+}
+
+.header-nav {
 }
 
 /* Welcome and question area */
@@ -157,4 +163,22 @@ h1 {
   max-width: 800px;
   margin: auto;
   text-align: center;
+}
+
+.header-link {
+  text-decoration: none;
+  color: #333; /* Neutral dark text color */
+  background-color: transparent; /* Transparent background */
+  padding: 8px 16px; /* Add padding for button-like appearance */
+  border: 1px solid #ccc; /* Subtle border */
+  border-radius: 5px; /* Rounded corners */
+  font-size: 1rem;
+  font-weight: 500; /* Medium weight for a clean look */
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+}
+
+.header-link:hover {
+  background-color: #f5f5f5; /* Light gray background on hover */
+  color: #000; /* Darker text on hover */
+  transform: scale(1.03); /* Slightly enlarge on hover */
 }
