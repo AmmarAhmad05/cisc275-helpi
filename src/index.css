@@ -1,13 +1,160 @@
+/* Reset & base styles */
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #fff;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.career-helpi-app {
+  padding: 20px;
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.tabs button {
+  padding: 5px 12px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* Header speech bubble */
+.speech-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.speech-bubble {
+  display: inline-block;
+  background: #f2f2f2;
+  padding: 10px 20px;
+  border-radius: 20px;
+  position: relative;
+  font-weight: bold;
+  box-shadow: 1px 1px 4px rgba(0,0,0,0.1);
+}
+
+.speech-bubble::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: -10px;
+  transform: translateY(-50%);
+  border: 10px solid transparent;
+  border-right-color: #f2f2f2;
+}
+
+/* Welcome and question area */
+.main-content {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+h1 {
+  margin-bottom: 20px;
+}
+
+.welcome-box {
+  border: 2px solid black;
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.search-container {
+  text-align: right;
+  margin: 10px 0;
+}
+
+.search-bar {
+  padding: 8px;
+  width: 250px;
+  border-radius: 10px;
+  border: 1px solid #999;
+}
+
+/* Question Buttons */
+.question-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 60px;
+  margin-top: 30px;
+}
+
+.question-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.question-block button {
+  padding: 10px 20px;
+  font-weight: bold;
+  border: 2px solid black;
+  background: white;
+  cursor: pointer;
+}
+
+.bubble {
+  border: 2px solid black;
+  border-radius: 15px;
+  padding: 10px;
+  margin-top: 10px;
+  max-width: 220px;
+  text-align: center;
+  background: white;
+}
+
+/* Footer */
+.footer {
+  text-align: right;
+  margin-top: 40px;
+}
+
+.footer button {
+  padding: 8px 16px;
+  font-weight: bold;
+  border: 2px solid black;
+  background: white;
+  cursor: pointer;
+}
+
+/* Navigation links */
+.nav-container {
+  text-align: right;
+  margin-top: 10px;
+}
+
+.nav-links a {
+  margin: 0 5px;
+  text-decoration: none;
+  color: #0044cc;
+}
+
+.nav-links a:hover {
+  text-decoration: underline;
+}
+
+/* Scribble decoration */
+.scribble {
+  width: 200px;
+  height: 40px;
+  background: black;
+  margin: 30px auto;
+  border-radius: 100px;
+}
+
+/* Placeholder pages */
+.page {
+  padding: 40px;
+  max-width: 800px;
+  margin: auto;
+  text-align: center;
 }
