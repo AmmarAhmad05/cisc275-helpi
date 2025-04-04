@@ -1,11 +1,14 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Header: React.FC = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="speech-container">
       <div className="speech-bubble">Career Helpi</div>
       <nav className="header-nav">
-        <a href="/" className="header-link">Home</a>
+        <button onClick={() => navigate('/')} className="header-link">Home</button>
       </nav>
     </div>
   );
