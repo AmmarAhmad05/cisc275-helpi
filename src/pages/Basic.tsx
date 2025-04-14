@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import toast from 'react-hot-toast';
 import Header from '../components/Header';
 import { useNavigate } from 'react-router-dom';
 
@@ -29,6 +30,7 @@ const Basic: React.FC = () => {
   // Handle form submission, To navigate to result page.
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    toast.success("Basic Questions Completed!", { duration: 3000 });
     console.log('Basic Assessment Data:', formData);
     navigate('/results');
   };
@@ -39,7 +41,6 @@ const Basic: React.FC = () => {
       <div className="assessment-container">
         <h2>Basic Career Assessment</h2>
         <p className="subtitle">Answer these questions to receive quick career suggestions.</p>
-        
         <form onSubmit={handleSubmit} className="assessment-form">
           <div className="form-group">
             <label htmlFor="interests">What are your main interests?</label>
