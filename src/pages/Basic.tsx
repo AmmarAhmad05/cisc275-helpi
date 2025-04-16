@@ -75,8 +75,8 @@ const Basic: React.FC = () => {
       case 1:
         return (
           <div className="form-step">
+            <h3>Do you currently have a job?</h3>
             <div className="form-group">
-              <label htmlFor="question1">Do you currently have a job?</label>
               <input
                 type="radio"
                 id="yes1"
@@ -101,6 +101,7 @@ const Basic: React.FC = () => {
       case 2:
         return (
           <div className="form-step">
+            <h3>What is your highest level of education completed?</h3>
             <div className="form-group">
               <label htmlFor="question2">Select your education level</label>
               <select
@@ -123,6 +124,7 @@ const Basic: React.FC = () => {
       case 3:
         return (
           <div className="form-step">
+            <h3>Which of the following fields are you most interested in?</h3>
             <div className="form-group">
               <label>Check all that apply:</label>
               <input
@@ -167,6 +169,7 @@ const Basic: React.FC = () => {
       case 4:
         return (
           <div className="form-step">
+            <h3>On a scale of 1 to 10, how satisfied are you with your current career direction?</h3>
             <div className="form-group">
               <label htmlFor="question4">Satisfaction Level</label>
               <input
@@ -184,6 +187,7 @@ const Basic: React.FC = () => {
       case 5:
         return (
           <div className="form-step">
+            <h3>What motivates you most in a job?</h3>
             <div className="form-group">
               <label htmlFor="question5">Select your main motivation:</label>
               <select
@@ -204,8 +208,8 @@ const Basic: React.FC = () => {
       case 6:
         return (
           <div className="form-step">
+            <h3>Are you open to relocating for a job?</h3>
             <div className="form-group">
-              <label htmlFor="question6">Are you open to relocating for a job?</label>
               <input
                 type="radio"
                 id="yes6"
@@ -230,6 +234,7 @@ const Basic: React.FC = () => {
       case 7:
         return (
           <div className="form-step">
+            <h3>Which type of work environment do you prefer?</h3>
             <div className="form-group">
               <label htmlFor="question7">Select your preferred work environment:</label>
               <select
@@ -250,6 +255,7 @@ const Basic: React.FC = () => {
       case 8:
         return (
           <div className="form-step">
+            <h3>What’s your current employment status?</h3>
             <div className="form-group">
               <label htmlFor="question8">Select your employment status:</label>
               <select
@@ -271,6 +277,7 @@ const Basic: React.FC = () => {
       case 9:
         return (
           <div className="form-step">
+            <h3>What are your biggest job search challenges?</h3>
             <div className="form-group">
               <label>Check all that apply:</label>
               <input
@@ -315,6 +322,7 @@ const Basic: React.FC = () => {
       case 10:
         return (
           <div className="form-step">
+            <h3>How soon are you looking to start a new job?</h3>
             <div className="form-group">
               <label htmlFor="question10">Select your job start timeframe:</label>
               <select
