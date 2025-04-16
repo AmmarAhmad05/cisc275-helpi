@@ -1,97 +1,201 @@
-/* Reset & base styles */
+/* Base Styles */
 body {
   margin: 0;
   padding: 0;
-  font-family: Arial, sans-serif;
-  background-color: #fff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
+/* Light Theme */
+body.light {
+  background: linear-gradient(to right, #f5f7fa, #c3cfe2);
+  color: #333;
+}
+
+/* Dark Theme - Clean Bluish Look */
+body.dark {
+  background: linear-gradient(to right, #0d1b2a, #1b263b);
+  color: #e0e6ed;
+}
+
+/* General Button Styles */
+button,
+.tabs button,
+.nav-button,
+.submit-button,
+.footer button,
+.header-link,
+.question-block button {
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.85);
+  color: #222;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+button:hover,
+.tabs button:hover,
+.nav-button:hover,
+.submit-button:hover,
+.footer button:hover,
+.header-link:hover,
+.question-block button:hover {
+  transform: translateY(-2px);
+  background: #ffffff;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+body.dark button,
+body.dark .tabs button,
+body.dark .nav-button,
+body.dark .submit-button,
+body.dark .footer button,
+body.dark .header-link,
+body.dark .question-block button {
+  background: rgba(255, 255, 255, 0.12);
+  color: #e0e6ed;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+body.dark button:hover,
+body.dark .tabs button:hover,
+body.dark .nav-button:hover,
+body.dark .submit-button:hover,
+body.dark .footer button:hover,
+body.dark .header-link:hover,
+body.dark .question-block button:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+/* App Container */
 .career-helpi-app {
-  padding: 20px;
+  padding: 30px;
 }
 
 /* Tabs */
 .tabs {
   display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
+  gap: 12px;
+  margin-bottom: 25px;
+  justify-content: center;
 }
 
-.tabs button {
-  padding: 5px 12px;
-  font-size: 14px;
-  cursor: pointer;
-}
-
-/* Header speech bubble */
+/* Header */
 .speech-container {
   display: flex;
-  justify-content: space-between; /* Align title to the left and nav to the right */
+  justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
-  padding: 0 20px; /* Add padding for spacing */
+  margin-bottom: 30px;
+  padding: 0 20px;
 }
 
 .speech-bubble {
   display: inline-block;
-  background: #f2f2f2;
-  padding: 10px 20px;
+  padding: 12px 24px;
   border-radius: 20px;
   position: relative;
-  font-weight: bold;
-  box-shadow: 1px 1px 4px rgba(0,0,0,0.1);
-  margin-right: 20px; /* Add space between the title and navigation */
+  font-weight: 600;
+  margin-right: 20px;
+  background: rgba(255, 255, 255, 0.75);
+  box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+}
+
+body.dark .speech-bubble::after {
+  border-right-color: rgba(255, 255, 255, 0.06);
 }
 
 .speech-bubble::after {
   content: '';
+  display: none;
   position: absolute;
   top: 50%;
   left: -10px;
   transform: translateY(-50%);
   border: 10px solid transparent;
-  border-right-color: #f2f2f2;
+  border-right-color: rgba(255, 255, 255, 0.75);
 }
 
-.header-nav {
-}
-
-/* Welcome and question area */
+/* Main Section */
 .main-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 50px;
 }
 
 h1 {
   margin-bottom: 20px;
+  font-size: 2.2rem;
 }
 
+/* Welcome Box */
 .welcome-box {
-  border: 2px solid black;
-  padding: 20px;
-  max-width: 800px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 50px 40px;
+  max-width: 1000px;
+  width: 90%;
   margin: 0 auto;
-  position: relative;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
 }
 
+.main-content h1 {
+  font-size: 2.6rem;
+}
+
+.question-block > strong,
+.question-block button {
+  font-size: 16px;
+  padding: 12px 24px;
+}
+
+
+
+.welcome-box:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+}
+
+/* Search */
 .search-container {
-  text-align: right;
-  margin: 10px 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .search-bar {
-  padding: 8px;
+  padding: 10px;
   width: 250px;
   border-radius: 10px;
-  border: 1px solid #999;
+  border: 1px solid #aaa;
+  font-size: 14px;
+  background-color: rgba(255,255,255,0.8);
+  color: inherit;
 }
 
 /* Question Buttons */
 .question-buttons {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
   gap: 60px;
-  margin-top: 30px;
+  width: 100%;
 }
 
 .question-block {
@@ -100,83 +204,301 @@ h1 {
   align-items: center;
 }
 
-.question-block button {
-  padding: 10px 20px;
+.question-block > strong {
+  background: rgba(255, 255, 255, 0.6);
+  padding: 8px 16px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   font-weight: bold;
-  border: 2px solid black;
-  background: white;
-  cursor: pointer;
+  font-size: 15px;
 }
 
+/* Bubble */
 .bubble {
-  border: 2px solid black;
-  border-radius: 15px;
-  padding: 10px;
-  margin-top: 10px;
-  max-width: 220px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 20px;
+  padding: 16px;
+  margin-top: 12px;
+  max-width: 240px;
   text-align: center;
-  background: white;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  font-size: 14px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.bubble:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
 }
 
 /* Footer */
 .footer {
   text-align: right;
   margin-top: 40px;
+  padding-right: 20px;
 }
 
-.footer button {
-  padding: 8px 16px;
-  font-weight: bold;
-  border: 2px solid black;
-  background: white;
-  cursor: pointer;
-}
-
-/* Navigation links */
+/* Nav Links */
 .nav-container {
   text-align: right;
   margin-top: 10px;
 }
 
 .nav-links a {
-  margin: 0 5px;
+  margin: 0 8px;
   text-decoration: none;
-  color: #0044cc;
+  color: #3399ff;
+  font-weight: 500;
 }
 
 .nav-links a:hover {
   text-decoration: underline;
 }
 
-/* Scribble decoration */
-.scribble {
-  width: 200px;
-  height: 40px;
-  background: black;
-  margin: 30px auto;
-  border-radius: 100px;
-}
-
-/* Placeholder pages */
+/* Page */
 .page {
   padding: 40px;
   max-width: 800px;
   margin: auto;
   text-align: center;
+  background: rgba(255,255,255,0.1);
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.1);
 }
 
+/* Header Link */
 .header-link {
   text-decoration: none;
-  color: #333; /* Neutral dark text color */
-  background-color: transparent; /* Transparent background */
-  padding: 8px 16px; /* Add padding for button-like appearance */
-  border: 1px solid #ccc; /* Subtle border */
-  border-radius: 5px; /* Rounded corners */
+  background-color: rgba(255, 255, 255, 0.7);
+  padding: 8px 16px;
+  border-radius: 8px;
   font-size: 1rem;
   font-weight: 500;
 }
 
-.header-link:hover {
-  background-color: #f5f5f5; /* Light gray background on hover */
-  color: #000; 
+/* Scribble */
+.scribble {
+  width: 200px;
+  height: 40px;
+  background: rgba(0, 0, 0, 0.8);
+  margin: 30px auto;
+  border-radius: 100px;
+}
+
+/* Global Component Theme Sync */
+body.light .bubble,
+body.light .page {
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #333;
+}
+
+body.dark .welcome-box,
+body.dark .bubble,
+body.dark .tabs button,
+body.dark .question-block button,
+body.dark .footer button,
+body.dark .header-link,
+body.dark input,
+body.dark .search-bar,
+body.dark .page,
+body.dark .speech-bubble,
+body.dark .assessment-container {
+  background-color: rgba(255, 255, 255, 0.06);
+  color: #e0e6ed;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+/* Placeholders */
+body.dark input::placeholder,
+body.dark textarea::placeholder {
+  color: #a5b1c2;
+}
+
+/* -------------------------- */
+/*     FORM ASSESSMENTS      */
+/* -------------------------- */
+
+.assessment-container {
+  max-width: 700px;
+  margin: 30px auto;
+  padding: 30px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  text-align: center;
+  transition: background 0.3s ease;
+}
+
+.assessment-container h2 {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+}
+
+.assessment-container .subtitle {
+  font-size: 0.95rem;
+  color: inherit;
+  margin-bottom: 20px;
+}
+
+.assessment-form {
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-step {
+  padding: 10px 0;
+  color: inherit;
+}
+.form-step h3 {
+  color: inherit;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.form-group label {
+  font-weight: 500;
+  font-size: 14px;
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+  margin-right: 8px;
+}
+
+input,
+select,
+textarea {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #aaa;
+  background-color: rgba(255, 255, 255, 0.8);
+  color: #222;
+  font-size: 14px;
+}
+
+body.dark input,
+body.dark select,
+body.dark textarea {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #e0e6ed;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #888;
+}
+
+.value-display {
+  margin-left: 8px;
+  font-weight: bold;
+}
+
+.progress-bar {
+  height: 6px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 5px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.progress {
+  height: 100%;
+  background: linear-gradient(to right, #38ef7d, #11998e);
+  transition: width 0.3s ease;
+}
+
+/* Ensure radio/checkbox labels show in dark mode */
+body.dark input[type="radio"] + label,
+body.dark input[type="checkbox"] + label {
+  color: #e0e6ed;
+}
+
+body.dark .assessment-container form {
+  background-color: rgba(255, 255, 255, 0.06);
+  color: #e0e6ed;
+}
+
+body.dark .assessment-container > form > div:not(.progress-bar):not(.form-navigation) {
+  background-color: rgba(20, 30, 50, 0.2) !important;
+  border-radius: 8px;
+  color: #e0e6ed;
+}
+
+body.dark .assessment-form {
+  background-color: rgba(20, 30, 50, 0.2);
+  color: #e0e6ed;
+  border-radius: 10px;
+}
+
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 30px;
+  font-weight: 500;
+  font-size: 16px;
+  color: inherit;
+  justify-content: center;
+}
+
+/* Toggle Switch */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 28px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0;
+  right: 0; bottom: 0;
+  background-color: #ccc;
+  transition: 0.3s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 20px; width: 20px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: 0.3s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #4caf50;
+}
+
+input:checked + .slider:before {
+  transform: translateX(22px);
 }
