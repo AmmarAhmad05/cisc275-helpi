@@ -4,18 +4,22 @@ body {
   padding: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   transition: background 0.3s ease, color 0.3s ease;
+  overflow-x: hidden;
+  position: relative;
 }
 
-/* Light Theme */
+/* Light Theme - Ocean Surface */
 body.light {
-  background: linear-gradient(to right, #f5f7fa, #c3cfe2);
-  color: #333;
+  background: linear-gradient(to bottom, #a2d4f5 0%, #d0f0ff 100%);
+  background-attachment: fixed;
+  color: #03354f;
 }
 
-/* Dark Theme - Clean Bluish Look */
+/* Dark Theme - Deep Ocean */
 body.dark {
-  background: linear-gradient(to right, #0d1b2a, #1b263b);
-  color: #e0e6ed;
+  background: linear-gradient(to bottom, #022b3a 0%, #053f5e 100%);
+  background-attachment: fixed;
+  color: #e0f7fa;
 }
 
 /* General Button Styles */
@@ -24,8 +28,7 @@ button,
 .nav-button,
 .submit-button,
 .footer button,
-.header-link,
-.question-block button {
+.header-link {
   padding: 10px 20px;
   font-size: 14px;
   font-weight: 600;
@@ -43,8 +46,7 @@ button:hover,
 .nav-button:hover,
 .submit-button:hover,
 .footer button:hover,
-.header-link:hover,
-.question-block button:hover {
+.header-link:hover {
   transform: translateY(-2px);
   background: #ffffff;
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
@@ -55,10 +57,9 @@ body.dark .tabs button,
 body.dark .nav-button,
 body.dark .submit-button,
 body.dark .footer button,
-body.dark .header-link,
-body.dark .question-block button {
+body.dark .header-link {
   background: rgba(255, 255, 255, 0.12);
-  color: #e0e6ed;
+  color: #e7e0fa;
   border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
@@ -67,8 +68,7 @@ body.dark .tabs button:hover,
 body.dark .nav-button:hover,
 body.dark .submit-button:hover,
 body.dark .footer button:hover,
-body.dark .header-link:hover,
-body.dark .question-block button:hover {
+body.dark .header-link:hover {
   background: rgba(255, 255, 255, 0.2);
   transform: translateY(-2px);
 }
@@ -106,19 +106,9 @@ body.dark .question-block button:hover {
   box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
 }
 
-body.dark .speech-bubble::after {
-  border-right-color: rgba(255, 255, 255, 0.06);
-}
-
-.speech-bubble::after {
-  content: '';
-  display: none;
-  position: absolute;
-  top: 50%;
-  left: -10px;
-  transform: translateY(-50%);
-  border: 10px solid transparent;
-  border-right-color: rgba(255, 255, 255, 0.75);
+body.dark .speech-bubble {
+  background: rgba(255, 255, 255, 0.08);
+  color: #e0f7fa;
 }
 
 /* Main Section */
@@ -133,6 +123,10 @@ body.dark .speech-bubble::after {
 h1 {
   margin-bottom: 20px;
   font-size: 2.2rem;
+}
+
+.main-content h1 {
+  font-size: 2.6rem;
 }
 
 /* Welcome Box */
@@ -154,18 +148,6 @@ h1 {
   justify-content: center;
   gap: 40px;
 }
-
-.main-content h1 {
-  font-size: 2.6rem;
-}
-
-.question-block > strong,
-.question-block button {
-  font-size: 16px;
-  padding: 12px 24px;
-}
-
-
 
 .welcome-box:hover {
   transform: translateY(-4px);
@@ -204,36 +186,37 @@ h1 {
   align-items: center;
 }
 
+/* Styling the fake "buttons" (strong tags) properly */
 .question-block > strong {
-  background: rgba(255, 255, 255, 0.6);
-  padding: 8px 16px;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  margin-bottom: 10px;
+  display: inline-block;
+  text-align: center;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.85);
+  color: #222;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  font-weight: bold;
-  font-size: 15px;
 }
 
-/* Bubble */
-.bubble {
-  background: rgba(255, 255, 255, 0.3);
-  border-radius: 20px;
-  padding: 16px;
-  margin-top: 12px;
-  max-width: 240px;
-  text-align: center;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  font-size: 14px;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+.question-block > strong:hover {
+  transform: translateY(-2px);
+  background: #ffffff;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
 }
 
-.bubble:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+body.dark .question-block > strong {
+  background: rgba(255, 255, 255, 0.12);
+  color: #e7e0fa;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+body.dark .question-block > strong:hover {
+  background: rgba(255, 255, 255, 0.2);
 }
 
 /* Footer */
@@ -271,16 +254,6 @@ h1 {
   box-shadow: 0 6px 16px rgba(0,0,0,0.1);
 }
 
-/* Header Link */
-.header-link {
-  text-decoration: none;
-  background-color: rgba(255, 255, 255, 0.7);
-  padding: 8px 16px;
-  border-radius: 8px;
-  font-size: 1rem;
-  font-weight: 500;
-}
-
 /* Scribble */
 .scribble {
   width: 200px;
@@ -290,40 +263,7 @@ h1 {
   border-radius: 100px;
 }
 
-/* Global Component Theme Sync */
-body.light .bubble,
-body.light .page {
-  background-color: rgba(255, 255, 255, 0.9);
-  color: #333;
-}
-
-body.dark .welcome-box,
-body.dark .bubble,
-body.dark .tabs button,
-body.dark .question-block button,
-body.dark .footer button,
-body.dark .header-link,
-body.dark input,
-body.dark .search-bar,
-body.dark .page,
-body.dark .speech-bubble,
-body.dark .assessment-container {
-  background-color: rgba(255, 255, 255, 0.06);
-  color: #e0e6ed;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
-}
-
-/* Placeholders */
-body.dark input::placeholder,
-body.dark textarea::placeholder {
-  color: #a5b1c2;
-}
-
-/* -------------------------- */
-/*     FORM ASSESSMENTS      */
-/* -------------------------- */
-
+/* Form Assessments */
 .assessment-container {
   max-width: 700px;
   margin: 30px auto;
@@ -359,6 +299,7 @@ body.dark textarea::placeholder {
   padding: 10px 0;
   color: inherit;
 }
+
 .form-step h3 {
   color: inherit;
   font-size: 1.2rem;
@@ -398,13 +339,18 @@ body.dark input,
 body.dark select,
 body.dark textarea {
   background-color: rgba(255, 255, 255, 0.1);
-  color: #e0e6ed;
+  color: #e0f7fa;
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 input::placeholder,
 textarea::placeholder {
   color: #888;
+}
+
+body.dark input::placeholder,
+body.dark textarea::placeholder {
+  color: #a5b1c2;
 }
 
 .value-display {
@@ -426,29 +372,7 @@ textarea::placeholder {
   transition: width 0.3s ease;
 }
 
-/* Ensure radio/checkbox labels show in dark mode */
-body.dark input[type="radio"] + label,
-body.dark input[type="checkbox"] + label {
-  color: #e0e6ed;
-}
-
-body.dark .assessment-container form {
-  background-color: rgba(255, 255, 255, 0.06);
-  color: #e0e6ed;
-}
-
-body.dark .assessment-container > form > div:not(.progress-bar):not(.form-navigation) {
-  background-color: rgba(20, 30, 50, 0.2) !important;
-  border-radius: 8px;
-  color: #e0e6ed;
-}
-
-body.dark .assessment-form {
-  background-color: rgba(20, 30, 50, 0.2);
-  color: #e0e6ed;
-  border-radius: 10px;
-}
-
+/* Toggle Theme Switch */
 .theme-toggle {
   display: flex;
   align-items: center;
@@ -502,3 +426,41 @@ input:checked + .slider {
 input:checked + .slider:before {
   transform: translateX(22px);
 }
+
+/* Floating Bubbles */
+.bubble-float {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.1));
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.5);
+  width: 8px;
+  height: 8px;
+  animation: floatBubble 20s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.7;
+}
+
+@keyframes floatBubble {
+  0% {
+    transform: translateY(0) translateX(0) scale(1);
+    opacity: 0.7;
+  }
+  25% {
+    transform: translateY(-25vh) translateX(10px) scale(1.2);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateY(-50vh) translateX(-10px) scale(1);
+    opacity: 0.3;
+  }
+  75% {
+    transform: translateY(-75vh) translateX(15px) scale(1.1);
+    opacity: 0.4;
+  }
+  100% {
+    transform: translateY(-100vh) translateX(-15px) scale(1);
+    opacity: 0;
+  }
+}
+
