@@ -29,10 +29,6 @@ const Home: React.FC = () => {
   return (
     <div className="career-helpi-app">
       <Header />
-      <div className="tabs">
-        <button>Chat</button>
-        <button>Prompt</button>
-      </div>
       <div className="main-content">
         <h1>Welcome to Career Helpi</h1>
         <div className="welcome-box">
