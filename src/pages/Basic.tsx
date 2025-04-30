@@ -100,6 +100,15 @@ const Basic: React.FC = () => {
                 onChange={handleChange}
               />
               <label htmlFor="no1">No</label>
+              <input
+                type="radio"
+                id="notSure1"
+                name="question1"
+                value="Not Sure"
+                checked={formData.question1.response === 'Not Sure'}
+                onChange={handleChange}
+              />
+              <label htmlFor="notSure1">Not Sure</label>
             </div>
           </div>
         );
@@ -122,6 +131,7 @@ const Basic: React.FC = () => {
                 <option value="Bachelor's Degree">Bachelor's Degree</option>
                 <option value="Master's Degree">Master's Degree</option>
                 <option value="Doctorate or Professional Degree">Doctorate or Professional Degree</option>
+                <option value="Not Sure">Not Sure</option>
               </select>
             </div>
           </div>
@@ -168,6 +178,15 @@ const Basic: React.FC = () => {
                 onChange={handleMultipleChoiceChange}
               />
               <label htmlFor="arts">Arts & Design</label>
+              <input
+                type="checkbox"
+                id="notSure"
+                name="question3"
+                value="Not Sure"
+                checked={(formData.question3.response as string[]).includes('Not Sure')}
+                onChange={handleMultipleChoiceChange}
+              />
+              <label htmlFor="notSure">Not Sure</label>
             </div>
           </div>
         );
@@ -206,6 +225,7 @@ const Basic: React.FC = () => {
                 <option value="Making a difference">Making a difference</option>
                 <option value="Job stability">Job stability</option>
                 <option value="Opportunities for growth">Opportunities for growth</option>
+                <option value="Not Sure">Not Sure</option>
               </select>
             </div>
           </div>
@@ -233,6 +253,15 @@ const Basic: React.FC = () => {
                 onChange={handleChange}
               />
               <label htmlFor="no6">No</label>
+              <input
+                type="radio"
+                id="notSure6"
+                name="question6"
+                value="Not Sure"
+                checked={formData.question1.response === 'Not Sure'}
+                onChange={handleChange}
+              />
+              <label htmlFor="notSure6">Not Sure</label>
             </div>
           </div>
         );
@@ -253,6 +282,7 @@ const Basic: React.FC = () => {
                 <option value="Remote">Remote</option>
                 <option value="Hybrid">Hybrid</option>
                 <option value="On-site">On-site</option>
+                <option value="Not Sure">Not Sure</option>
               </select>
             </div>
           </div>
@@ -275,6 +305,7 @@ const Basic: React.FC = () => {
                 <option value="Self-employed">Self-employed</option>
                 <option value="Unemployed">Unemployed</option>
                 <option value="Student">Student</option>
+                <option value="Not Sure">Not Sure</option>
               </select>
             </div>
           </div>
@@ -321,6 +352,15 @@ const Basic: React.FC = () => {
                 onChange={handleMultipleChoiceChange}
               />
               <label htmlFor="experience">Lack of experience</label>
+              <input
+                type="radio"
+                id="notSure9"
+                name="question9"
+                value="Not Sure"
+                checked={formData.question1.response === 'Not Sure'}
+                onChange={handleChange}
+              />
+              <label htmlFor="notSure9">Not Sure</label>
             </div>
           </div>
         );
