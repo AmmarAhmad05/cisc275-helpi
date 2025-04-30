@@ -3,47 +3,52 @@ import toast from 'react-hot-toast';
 import Header from '../components/Header';
 import { useNavigate } from 'react-router-dom';
 
+interface Question {
+  title: string;
+  response: string | string[] | number;
+}
+
 interface BasicAssessmentState {
-  question1: string;
-  question2: string;
-  question3: string[];
-  question4: number;
-  question5: string;
-  question6: string;
-  question7: string;
-  question8: string;
-  question9: string[];
-  question10: string;
+  question1: Question;
+  question2: Question;
+  question3: Question;
+  question4: Question;
+  question5: Question;
+  question6: Question;
+  question7: Question;
+  question8: Question;
+  question9: Question;
+  question10: Question;
 }
 
 const Basic: React.FC = () => {
   const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState<BasicAssessmentState>({
-    question1: '',
-    question2: '',
-    question3: [],
-    question4: 0,
-    question5: '',
-    question6: '',
-    question7: '',
-    question8: '',
-    question9: [],
-    question10: '',
+    question1: { title: "Do you currently have a job?", response: "" },
+    question2: { title: "What is your highest level of education completed?", response: "" },
+    question3: { title: "Which of the following fields are you most interested in?", response: [] },
+    question4: { title: "On a scale of 1 to 10, how satisfied are you with your current career direction?", response: 0 },
+    question5: { title: "What motivates you most in a job?", response: "" },
+    question6: { title: "Are you open to relocating for a job?", response: "" },
+    question7: { title: "Which type of work environment do you prefer?", response: "" },
+    question8: { title: "What’s your current employment status?", response: "" },
+    question9: { title: "What are your biggest job search challenges?", response: [] },
+    question10: { title: "How soon are you looking to start a new job?", response: "" },
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
-      [name]: value,
+      [name]: { ...prev[name as keyof BasicAssessmentState], response: value },
     }));
   };
 
   const handleMultipleChoiceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, checked } = e.target;
     setFormData(prev => {
-      const currentValue = prev[name as keyof BasicAssessmentState];
+      const currentValue = prev[name as keyof BasicAssessmentState].response;
 
       if (Array.isArray(currentValue)) {
         let newValue = [...currentValue];
@@ -52,10 +57,10 @@ const Basic: React.FC = () => {
         } else {
           newValue = newValue.filter((item: string) => item !== value);
         }
-        return { ...prev, [name]: newValue };
+        return { ...prev, [name]: { ...prev[name as keyof BasicAssessmentState], response: newValue } };
       } else {
         let newValue = checked ? [value] : [];
-        return { ...prev, [name]: newValue };
+        return { ...prev, [name]: { ...prev[name as keyof BasicAssessmentState], response: newValue } };
       }
     });
   };
@@ -64,7 +69,7 @@ const Basic: React.FC = () => {
     e.preventDefault();
     toast.success("Basic Questions Completed!", { duration: 3000 });
     console.log('Basic Assessment Data:', formData);
-    navigate('/results');
+    navigate('/results', { state: { formData } }); // Pass formData to Results page
   };
 
   const nextStep = () => setCurrentStep(prev => prev + 1);
@@ -75,14 +80,14 @@ const Basic: React.FC = () => {
       case 1:
         return (
           <div className="form-step">
-            <h3>Do you currently have a job?</h3>
+            <h3>{formData.question1.title}</h3>
             <div className="form-group">
               <input
                 type="radio"
                 id="yes1"
                 name="question1"
                 value="Yes"
-                checked={formData.question1 === 'Yes'}
+                checked={formData.question1.response === 'Yes'}
                 onChange={handleChange}
               />
               <label htmlFor="yes1">Yes</label>
@@ -91,7 +96,7 @@ const Basic: React.FC = () => {
                 id="no1"
                 name="question1"
                 value="No"
-                checked={formData.question1 === 'No'}
+                checked={formData.question1.response === 'No'}
                 onChange={handleChange}
               />
               <label htmlFor="no1">No</label>
@@ -101,13 +106,13 @@ const Basic: React.FC = () => {
       case 2:
         return (
           <div className="form-step">
-            <h3>What is your highest level of education completed?</h3>
+            <h3>{formData.question2.title}</h3>
             <div className="form-group">
               <label htmlFor="question2">Select your education level</label>
               <select
                 id="question2"
                 name="question2"
-                value={formData.question2}
+                value={formData.question2.response as string}
                 onChange={handleChange}
               >
                 <option value="">Select an option</option>
@@ -124,7 +129,7 @@ const Basic: React.FC = () => {
       case 3:
         return (
           <div className="form-step">
-            <h3>Which of the following fields are you most interested in?</h3>
+            <h3>{formData.question3.title}</h3>
             <div className="form-group">
               <label>Check all that apply:</label>
               <input
@@ -132,7 +137,7 @@ const Basic: React.FC = () => {
                 id="tech"
                 name="question3"
                 value="Technology & IT"
-                checked={formData.question3.includes('Technology & IT')}
+                checked={(formData.question3.response as string[]).includes('Technology & IT')}
                 onChange={handleMultipleChoiceChange}
               />
               <label htmlFor="tech">Technology & IT</label>
@@ -141,7 +146,7 @@ const Basic: React.FC = () => {
                 id="healthcare"
                 name="question3"
                 value="Healthcare & Medicine"
-                checked={formData.question3.includes('Healthcare & Medicine')}
+                checked={(formData.question3.response as string[]).includes('Healthcare & Medicine')}
                 onChange={handleMultipleChoiceChange}
               />
               <label htmlFor="healthcare">Healthcare & Medicine</label>
@@ -150,7 +155,7 @@ const Basic: React.FC = () => {
                 id="business"
                 name="question3"
                 value="Business & Finance"
-                checked={formData.question3.includes('Business & Finance')}
+                checked={(formData.question3.response as string[]).includes('Business & Finance')}
                 onChange={handleMultipleChoiceChange}
               />
               <label htmlFor="business">Business & Finance</label>
@@ -159,7 +164,7 @@ const Basic: React.FC = () => {
                 id="arts"
                 name="question3"
                 value="Arts & Design"
-                checked={formData.question3.includes('Arts & Design')}
+                checked={(formData.question3.response as string[]).includes('Arts & Design')}
                 onChange={handleMultipleChoiceChange}
               />
               <label htmlFor="arts">Arts & Design</label>
@@ -169,14 +174,14 @@ const Basic: React.FC = () => {
       case 4:
         return (
           <div className="form-step">
-            <h3>On a scale of 1 to 10, how satisfied are you with your current career direction?</h3>
+            <h3>{formData.question4.title}</h3>
             <div className="form-group">
               <label htmlFor="question4">Satisfaction Level</label>
               <input
                 type="number"
                 id="question4"
                 name="question4"
-                value={formData.question4}
+                value={formData.question4.response as number}
                 onChange={handleChange}
                 min="1"
                 max="10"
@@ -187,13 +192,13 @@ const Basic: React.FC = () => {
       case 5:
         return (
           <div className="form-step">
-            <h3>What motivates you most in a job?</h3>
+            <h3>{formData.question5.title}</h3>
             <div className="form-group">
               <label htmlFor="question5">Select your main motivation:</label>
               <select
                 id="question5"
                 name="question5"
-                value={formData.question5}
+                value={formData.question5.response as string}
                 onChange={handleChange}
               >
                 <option value="">Select an option</option>
@@ -208,14 +213,14 @@ const Basic: React.FC = () => {
       case 6:
         return (
           <div className="form-step">
-            <h3>Are you open to relocating for a job?</h3>
+            <h3>{formData.question6.title}</h3>
             <div className="form-group">
               <input
                 type="radio"
                 id="yes6"
                 name="question6"
                 value="Yes"
-                checked={formData.question6 === 'Yes'}
+                checked={formData.question6.response === 'Yes'}
                 onChange={handleChange}
               />
               <label htmlFor="yes6">Yes</label>
@@ -224,7 +229,7 @@ const Basic: React.FC = () => {
                 id="no6"
                 name="question6"
                 value="No"
-                checked={formData.question6 === 'No'}
+                checked={formData.question6.response === 'No'}
                 onChange={handleChange}
               />
               <label htmlFor="no6">No</label>
@@ -234,13 +239,13 @@ const Basic: React.FC = () => {
       case 7:
         return (
           <div className="form-step">
-            <h3>Which type of work environment do you prefer?</h3>
+            <h3>{formData.question7.title}</h3>
             <div className="form-group">
               <label htmlFor="question7">Select your preferred work environment:</label>
               <select
                 id="question7"
                 name="question7"
-                value={formData.question7}
+                value={formData.question7.response as string}
                 onChange={handleChange}
               >
                 <option value="">Select an option</option>
@@ -255,13 +260,13 @@ const Basic: React.FC = () => {
       case 8:
         return (
           <div className="form-step">
-            <h3>What’s your current employment status?</h3>
+            <h3>{formData.question8.title}</h3>
             <div className="form-group">
               <label htmlFor="question8">Select your employment status:</label>
               <select
                 id="question8"
                 name="question8"
-                value={formData.question8}
+                value={formData.question8.response as string}
                 onChange={handleChange}
               >
                 <option value="">Select an option</option>
@@ -277,7 +282,7 @@ const Basic: React.FC = () => {
       case 9:
         return (
           <div className="form-step">
-            <h3>What are your biggest job search challenges?</h3>
+            <h3>{formData.question9.title}</h3>
             <div className="form-group">
               <label>Check all that apply:</label>
               <input
@@ -285,7 +290,7 @@ const Basic: React.FC = () => {
                 id="resume"
                 name="question9"
                 value="Writing a strong resume"
-                checked={formData.question9.includes('Writing a strong resume')}
+                checked={(formData.question9.response as string[]).includes('Writing a strong resume')}
                 onChange={handleMultipleChoiceChange}
               />
               <label htmlFor="resume">Writing a strong resume</label>
@@ -294,7 +299,7 @@ const Basic: React.FC = () => {
                 id="interview"
                 name="question9"
                 value="Interviewing"
-                checked={formData.question9.includes('Interviewing')}
+                checked={(formData.question9.response as string[]).includes('Interviewing')}
                 onChange={handleMultipleChoiceChange}
               />
               <label htmlFor="interview">Interviewing</label>
@@ -303,7 +308,7 @@ const Basic: React.FC = () => {
                 id="finding_jobs"
                 name="question9"
                 value="Finding the right jobs"
-                checked={formData.question9.includes('Finding the right jobs')}
+                checked={(formData.question9.response as string[]).includes('Finding the right jobs')}
                 onChange={handleMultipleChoiceChange}
               />
               <label htmlFor="finding_jobs">Finding the right jobs</label>
@@ -312,7 +317,7 @@ const Basic: React.FC = () => {
                 id="experience"
                 name="question9"
                 value="Lack of experience"
-                checked={formData.question9.includes('Lack of experience')}
+                checked={(formData.question9.response as string[]).includes('Lack of experience')}
                 onChange={handleMultipleChoiceChange}
               />
               <label htmlFor="experience">Lack of experience</label>
@@ -322,13 +327,13 @@ const Basic: React.FC = () => {
       case 10:
         return (
           <div className="form-step">
-            <h3>How soon are you looking to start a new job?</h3>
+            <h3>{formData.question10.title}</h3>
             <div className="form-group">
               <label htmlFor="question10">Select your job start timeframe:</label>
               <select
                 id="question10"
                 name="question10"
-                value={formData.question10}
+                value={formData.question10.response as string}
                 onChange={handleChange}
               >
                 <option value="">Select an option</option>
