@@ -82,6 +82,7 @@ const Basic: React.FC = () => {
           <div className="form-step">
             <h3>{formData.question1.title}</h3>
             <div className="form-group">
+              <label htmlFor="question1">Do you currently have a job?</label>
               <input
                 type="radio"
                 id="yes1"
@@ -141,7 +142,7 @@ const Basic: React.FC = () => {
           <div className="form-step">
             <h3>{formData.question3.title}</h3>
             <div className="form-group">
-              <label>Check all that apply:</label>
+              <label htmlFor="question3">Check all that apply:</label>
               <input
                 type="checkbox"
                 id="tech"
@@ -180,7 +181,7 @@ const Basic: React.FC = () => {
               <label htmlFor="arts">Arts & Design</label>
               <input
                 type="checkbox"
-                id="notSure"
+                id="notSure3"
                 name="question3"
                 value="Not Sure"
                 checked={(formData.question3.response as string[]).includes('Not Sure')}
@@ -235,6 +236,7 @@ const Basic: React.FC = () => {
           <div className="form-step">
             <h3>{formData.question6.title}</h3>
             <div className="form-group">
+            <label htmlFor="question6">Are you open to relocating for a job?</label>
               <input
                 type="radio"
                 id="yes6"
@@ -258,7 +260,7 @@ const Basic: React.FC = () => {
                 id="notSure6"
                 name="question6"
                 value="Not Sure"
-                checked={formData.question1.response === 'Not Sure'}
+                checked={formData.question6.response === 'Not Sure'}
                 onChange={handleChange}
               />
               <label htmlFor="notSure6">Not Sure</label>
@@ -353,11 +355,11 @@ const Basic: React.FC = () => {
               />
               <label htmlFor="experience">Lack of experience</label>
               <input
-                type="radio"
+                type="checkbox"
                 id="notSure9"
                 name="question9"
                 value="Not Sure"
-                checked={formData.question1.response === 'Not Sure'}
+                checked={(formData.question9.response as string[]).includes('Not Sure')}
                 onChange={handleChange}
               />
               <label htmlFor="notSure9">Not Sure</label>
