@@ -157,6 +157,7 @@ const Detailed: React.FC = () => {
                 <option value="flexible">Flexible Hours</option>
                 <option value="shift">Shift Work</option>
                 <option value="parttime">Part-time</option>
+                <option value="notSure">Not Sure</option>
               </select>
             </div>
             <div className="form-group">
@@ -173,6 +174,7 @@ const Detailed: React.FC = () => {
                 <option value="remote">Remote</option>
                 <option value="hybrid">Hybrid</option>
                 <option value="field">Field Work</option>
+                <option value="notSure">Not Sure</option>
               </select>
             </div>
             <div className="form-group">
@@ -189,6 +191,7 @@ const Detailed: React.FC = () => {
                 <option value="small">Small Team (2-5)</option>
                 <option value="medium">Medium Team (6-15)</option>
                 <option value="large">Large Team (16+)</option>
+                <option value="notSure">Not Sure</option>
               </select>
             </div>
             <div className="form-group">
@@ -217,13 +220,14 @@ const Detailed: React.FC = () => {
                 name="experience.years"
                 value={formData.experience.years}
                 onChange={handleChange}
-                required
+                //required
               >
                 <option value="">Select an option</option>
                 <option value="0-2">0-2 years</option>
                 <option value="3-5">3-5 years</option>
                 <option value="6-10">6-10 years</option>
                 <option value="10+">10+ years</option>
+                <option value="notSure">Not Sure</option>
               </select>
             </div>
             <div className="form-group">
