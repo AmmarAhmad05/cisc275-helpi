@@ -72,8 +72,43 @@ const Basic: React.FC = () => {
     navigate('/results', { state: { formData } });
   };
 
-  const nextStep = () => setCurrentStep(prev => prev + 1);
+  const nextStep = () => {
+    if (!isStepAnswered(currentStep, formData)) {
+      toast.error('Please select an option to continue.');
+      return;
+    }
+    toast.dismiss();
+    setCurrentStep(prev => prev + 1);
+  };
+
   const prevStep = () => setCurrentStep(prev => prev - 1);
+
+  const isStepAnswered = (step: number, formData: BasicAssessmentState) => {
+    switch (step) {
+      case 1:
+        return formData.question1.response !== '';
+      case 2:
+        return formData.question2.response !== '';
+      case 3:
+        return (formData.question3.response as string[]).length > 0;
+      case 4:
+        return formData.question4.response !== 0 && formData.question4.response !== '';
+      case 5:
+        return formData.question5.response !== '';
+      case 6:
+        return formData.question6.response !== '';
+      case 7:
+        return formData.question7.response !== '';
+      case 8:
+        return formData.question8.response !== '';
+      case 9:
+        return (formData.question9.response as string[]).length > 0;
+      case 10:
+        return formData.question10.response !== '';
+      default:
+        return false;
+    }
+  };
 
   const renderStep = () => {
     switch (currentStep) {
@@ -81,35 +116,22 @@ const Basic: React.FC = () => {
         return (
           <div className="form-step">
             <h3>{formData.question1.title}</h3>
-            <div className="form-group">
+            <div className="form-group" style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
               <label htmlFor="question1">Do you currently have a job?</label>
-              <input
-                type="radio"
-                id="yes1"
-                name="question1"
-                value="Yes"
-                checked={formData.question1.response === 'Yes'}
-                onChange={handleChange}
-              />
-              <label htmlFor="yes1">Yes</label>
-              <input
-                type="radio"
-                id="no1"
-                name="question1"
-                value="No"
-                checked={formData.question1.response === 'No'}
-                onChange={handleChange}
-              />
-              <label htmlFor="no1">No</label>
-              <input
-                type="radio"
-                id="notSure1"
-                name="question1"
-                value="Not Sure"
-                checked={formData.question1.response === 'Not Sure'}
-                onChange={handleChange}
-              />
-              <label htmlFor="notSure1">Not Sure</label>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginTop: 8 }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12 }}>
+                  <span>Yes</span>
+                  <input type="radio" name="question1" value="Yes" checked={formData.question1.response === 'Yes'} onChange={handleChange} />
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12 }}>
+                  <span>No</span>
+                  <input type="radio" name="question1" value="No" checked={formData.question1.response === 'No'} onChange={handleChange} />
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12 }}>
+                  <span>Not Sure</span>
+                  <input type="radio" name="question1" value="Not Sure" checked={formData.question1.response === 'Not Sure'} onChange={handleChange} />
+                </div>
+              </div>
             </div>
           </div>
         );
@@ -143,51 +165,28 @@ const Basic: React.FC = () => {
             <h3>{formData.question3.title}</h3>
             <div className="form-group">
               <label htmlFor="question3">Check all that apply:</label>
-              <input
-                type="checkbox"
-                id="tech"
-                name="question3"
-                value="Technology & IT"
-                checked={(formData.question3.response as string[]).includes('Technology & IT')}
-                onChange={handleMultipleChoiceChange}
-              />
-              <label htmlFor="tech">Technology & IT</label>
-              <input
-                type="checkbox"
-                id="healthcare"
-                name="question3"
-                value="Healthcare & Medicine"
-                checked={(formData.question3.response as string[]).includes('Healthcare & Medicine')}
-                onChange={handleMultipleChoiceChange}
-              />
-              <label htmlFor="healthcare">Healthcare & Medicine</label>
-              <input
-                type="checkbox"
-                id="business"
-                name="question3"
-                value="Business & Finance"
-                checked={(formData.question3.response as string[]).includes('Business & Finance')}
-                onChange={handleMultipleChoiceChange}
-              />
-              <label htmlFor="business">Business & Finance</label>
-              <input
-                type="checkbox"
-                id="arts"
-                name="question3"
-                value="Arts & Design"
-                checked={(formData.question3.response as string[]).includes('Arts & Design')}
-                onChange={handleMultipleChoiceChange}
-              />
-              <label htmlFor="arts">Arts & Design</label>
-              <input
-                type="checkbox"
-                id="notSure3"
-                name="question3"
-                value="Not Sure"
-                checked={(formData.question3.response as string[]).includes('Not Sure')}
-                onChange={handleMultipleChoiceChange}
-              />
-              <label htmlFor="notSure">Not Sure</label>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginTop: 8 }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12 }}>
+                  <span>Technology & IT</span>
+                  <input type="checkbox" name="question3" value="Technology & IT" checked={(formData.question3.response as string[]).includes('Technology & IT')} onChange={handleMultipleChoiceChange} />
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12 }}>
+                  <span>Healthcare & Medicine</span>
+                  <input type="checkbox" name="question3" value="Healthcare & Medicine" checked={(formData.question3.response as string[]).includes('Healthcare & Medicine')} onChange={handleMultipleChoiceChange} />
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12 }}>
+                  <span>Business & Finance</span>
+                  <input type="checkbox" name="question3" value="Business & Finance" checked={(formData.question3.response as string[]).includes('Business & Finance')} onChange={handleMultipleChoiceChange} />
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12 }}>
+                  <span>Arts & Design</span>
+                  <input type="checkbox" name="question3" value="Arts & Design" checked={(formData.question3.response as string[]).includes('Arts & Design')} onChange={handleMultipleChoiceChange} />
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12 }}>
+                  <span>Not Sure</span>
+                  <input type="checkbox" name="question3" value="Not Sure" checked={(formData.question3.response as string[]).includes('Not Sure')} onChange={handleMultipleChoiceChange} />
+                </div>
+              </div>
             </div>
           </div>
         );
@@ -236,34 +235,21 @@ const Basic: React.FC = () => {
           <div className="form-step">
             <h3>{formData.question6.title}</h3>
             <div className="form-group">
-            <label htmlFor="question6">Are you open to relocating for a job?</label>
-              <input
-                type="radio"
-                id="yes6"
-                name="question6"
-                value="Yes"
-                checked={formData.question6.response === 'Yes'}
-                onChange={handleChange}
-              />
-              <label htmlFor="yes6">Yes</label>
-              <input
-                type="radio"
-                id="no6"
-                name="question6"
-                value="No"
-                checked={formData.question6.response === 'No'}
-                onChange={handleChange}
-              />
-              <label htmlFor="no6">No</label>
-              <input
-                type="radio"
-                id="notSure6"
-                name="question6"
-                value="Not Sure"
-                checked={formData.question6.response === 'Not Sure'}
-                onChange={handleChange}
-              />
-              <label htmlFor="notSure6">Not Sure</label>
+              <label htmlFor="question6">Are you open to relocating for a job?</label>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginTop: 8 }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12 }}>
+                  <span>Yes</span>
+                  <input type="radio" name="question6" value="Yes" checked={formData.question6.response === 'Yes'} onChange={handleChange} />
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12 }}>
+                  <span>No</span>
+                  <input type="radio" name="question6" value="No" checked={formData.question6.response === 'No'} onChange={handleChange} />
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12 }}>
+                  <span>Not Sure</span>
+                  <input type="radio" name="question6" value="Not Sure" checked={formData.question6.response === 'Not Sure'} onChange={handleChange} />
+                </div>
+              </div>
             </div>
           </div>
         );
@@ -318,51 +304,28 @@ const Basic: React.FC = () => {
             <h3>{formData.question9.title}</h3>
             <div className="form-group">
               <label>Check all that apply:</label>
-              <input
-                type="checkbox"
-                id="resume"
-                name="question9"
-                value="Writing a strong resume"
-                checked={(formData.question9.response as string[]).includes('Writing a strong resume')}
-                onChange={handleMultipleChoiceChange}
-              />
-              <label htmlFor="resume">Writing a strong resume</label>
-              <input
-                type="checkbox"
-                id="interview"
-                name="question9"
-                value="Interviewing"
-                checked={(formData.question9.response as string[]).includes('Interviewing')}
-                onChange={handleMultipleChoiceChange}
-              />
-              <label htmlFor="interview">Interviewing</label>
-              <input
-                type="checkbox"
-                id="finding_jobs"
-                name="question9"
-                value="Finding the right jobs"
-                checked={(formData.question9.response as string[]).includes('Finding the right jobs')}
-                onChange={handleMultipleChoiceChange}
-              />
-              <label htmlFor="finding_jobs">Finding the right jobs</label>
-              <input
-                type="checkbox"
-                id="experience"
-                name="question9"
-                value="Lack of experience"
-                checked={(formData.question9.response as string[]).includes('Lack of experience')}
-                onChange={handleMultipleChoiceChange}
-              />
-              <label htmlFor="experience">Lack of experience</label>
-              <input
-                type="checkbox"
-                id="notSure9"
-                name="question9"
-                value="Not Sure"
-                checked={(formData.question9.response as string[]).includes('Not Sure')}
-                onChange={handleChange}
-              />
-              <label htmlFor="notSure9">Not Sure</label>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginTop: 8 }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12 }}>
+                  <span>Writing a strong resume</span>
+                  <input type="checkbox" name="question9" value="Writing a strong resume" checked={(formData.question9.response as string[]).includes('Writing a strong resume')} onChange={handleMultipleChoiceChange} />
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12 }}>
+                  <span>Interviewing</span>
+                  <input type="checkbox" name="question9" value="Interviewing" checked={(formData.question9.response as string[]).includes('Interviewing')} onChange={handleMultipleChoiceChange} />
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12 }}>
+                  <span>Finding the right jobs</span>
+                  <input type="checkbox" name="question9" value="Finding the right jobs" checked={(formData.question9.response as string[]).includes('Finding the right jobs')} onChange={handleMultipleChoiceChange} />
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12 }}>
+                  <span>Lack of experience</span>
+                  <input type="checkbox" name="question9" value="Lack of experience" checked={(formData.question9.response as string[]).includes('Lack of experience')} onChange={handleMultipleChoiceChange} />
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12 }}>
+                  <span>Not Sure</span>
+                  <input type="checkbox" name="question9" value="Not Sure" checked={(formData.question9.response as string[]).includes('Not Sure')} onChange={handleMultipleChoiceChange} />
+                </div>
+              </div>
             </div>
           </div>
         );
@@ -393,31 +356,49 @@ const Basic: React.FC = () => {
   };
 
   return (
-    <div className="career-helpi-app">
+    <div className="page">
       <Header />
-      <div className="page-container">
-        <h2>Basic Career Assessment</h2>
-        <p className="subtitle" style={{ textAlign: 'center', color: '#4a5568', marginBottom: 32 }}>
-          Answer these simple questions to begin your career discovery journey.
-        </p>
-        <div className="card">
-          <form onSubmit={handleSubmit} className="assessment-form">
-            <div className="progress-bar">
-              <div className="progress" style={{ width: `${(currentStep / 10) * 100}%` }}></div>
+      <div className="page-container" style={{ minHeight: '80vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div
+          className="card"
+          style={{
+            maxWidth: 600,
+            width: '100%',
+            margin: '0 auto',
+            background: '#fff',
+            border: '1px solid #e5e7eb',
+            boxShadow: '0 8px 32px rgba(99,102,241,0.10)',
+            borderRadius: 24,
+            padding: '48px 40px',
+            animation: 'fadeInUp 0.8s cubic-bezier(.23,1.01,.32,1) 0.1s both',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          <h2 style={{ fontSize: '2rem', fontWeight: 800, color: '#2c3e50', marginBottom: 8, textAlign: 'center', letterSpacing: '-1px' }}>
+            Basic Career Assessment
+          </h2>
+          <p style={{ color: '#4a5568', fontSize: '1.18rem', marginBottom: 32, textAlign: 'center', maxWidth: 480 }}>
+            Answer these simple questions to begin your career discovery journey.
+          </p>
+          <form onSubmit={handleSubmit} className="assessment-form" style={{ width: '100%' }}>
+            <div className="progress-bar" style={{ marginBottom: 32, height: 10, background: '#e5e7eb' }}>
+              <div className="progress" style={{ width: `${(currentStep / 10) * 100}%`, background: 'linear-gradient(90deg, #6366f1 0%, #38bdf8 100%)', height: '100%' }}></div>
             </div>
             {renderStep()}
-            <div className="form-navigation">
+            <div className="form-navigation" style={{ marginTop: 32 }}>
               {currentStep > 1 && (
-                <button type="button" onClick={prevStep} className="button button-secondary">
+                <button type="button" onClick={prevStep} className="button button-secondary" style={{ minWidth: 120 }}>
                   Previous
                 </button>
               )}
               {currentStep < 10 ? (
-                <button type="button" onClick={nextStep} className="button button-primary">
+                <button type="button" onClick={nextStep} className="button button-primary" style={{ minWidth: 120 }}>
                   Next
                 </button>
               ) : (
-                <button type="submit" className="button button-primary">
+                <button type="submit" className="button button-primary" style={{ minWidth: 180 }} disabled={!isStepAnswered(currentStep, formData)}>
                   Get Basic Career Suggestions
                 </button>
               )}
@@ -425,6 +406,12 @@ const Basic: React.FC = () => {
           </form>
         </div>
       </div>
+      <style>{`
+        @keyframes fadeInUp {
+          0% { opacity: 0; transform: translateY(40px); }
+          100% { opacity: 1; transform: translateY(0); }
+        }
+      `}</style>
     </div>
   );
 };
