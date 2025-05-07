@@ -26,6 +26,7 @@ const Results: React.FC = () => {
       const savedKey = localStorage.getItem("MYKEY");
       if (!savedKey) {
         setSuggestions("API key not found. Please enter your key on the home page.");
+        console.log("API key not found");
         setLoading(false);
         return;
       }
