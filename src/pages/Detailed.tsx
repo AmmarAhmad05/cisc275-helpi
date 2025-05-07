@@ -355,7 +355,7 @@ Experience & Education:
   };
 
   return (
-    <div className="page">
+    <div className="career-helpi-app">
       <Header />
       <div className="page-container" style={{ minHeight: '80vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <div
