@@ -103,12 +103,32 @@ const Detailed: React.FC = () => {
       }
     };
 
+    const summary = `
+Personality Assessment:
+${formattedData.personality}
+
+Skills Assessment:
+${formattedData.skills}
+
+Work Preferences:
+- Work Hours: ${formattedData.preferences.workHours}
+- Work Location: ${formattedData.preferences.workLocation}
+- Team Size: ${formattedData.preferences.teamSize}
+- Salary Importance: ${formattedData.preferences.salaryImportance}
+
+Experience & Education:
+- Years of Experience: ${formattedData.experience.years}
+- Industries: ${formattedData.experience.industries}
+- Certifications: ${formattedData.experience.certifications}
+    `.trim();
+
     // Create a structured object for the results page
     const resultsData = {
       question1: { title: "Personality Assessment", response: formattedData.personality },
       question2: { title: "Skills Assessment", response: formattedData.skills },
       question3: { title: "Work Preferences", response: Object.entries(formattedData.preferences).map(([key, value]) => `${key}: ${value}`).join('\n') },
-      question4: { title: "Experience & Education", response: Object.entries(formattedData.experience).map(([key, value]) => `${key}: ${value}`).join('\n') }
+      question4: { title: "Experience & Education", response: Object.entries(formattedData.experience).map(([key, value]) => `${key}: ${value}`).join('\n') },
+      summary: { title: "Complete Assessment Summary", response: summary }
     };
 
     toast.success("Detailed Questions Completed!", { duration: 3000 });
