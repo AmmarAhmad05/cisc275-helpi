@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Header from '../components/Header';
 import NavLinks from '../components/NavLinks';
-import SearchBar from '../components/SearchBar';
 import QuestionButtons from '../components/QuestionButtons';
 import Footer from '../components/Footer';
 import '../styles/shared.css';
@@ -133,7 +132,6 @@ const Home: React.FC = () => {
             animation: 'fadeInUp 1s cubic-bezier(.23,1.01,.32,1) 0.1s both',
           }}
         >
-          {/* <SearchBar /> */}
           <QuestionButtons />
           <form
             onSubmit={e => {

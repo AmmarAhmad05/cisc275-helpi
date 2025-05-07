@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 import Header from '../components/Header';
 import { useNavigate } from 'react-router-dom';
-import OpenAI from 'openai';
 import '../styles/shared.css';
 
 interface DetailedAssessmentState {
@@ -103,26 +102,6 @@ const Detailed: React.FC = () => {
         certifications: formData.experience.certifications
       }
     };
-
-    // Create a summary string for OpenAI
-    const summary = `
-Personality Assessment:
-${formattedData.personality}
-
-Skills Assessment:
-${formattedData.skills}
-
-Work Preferences:
-- Work Hours: ${formattedData.preferences.workHours}
-- Work Location: ${formattedData.preferences.workLocation}
-- Team Size: ${formattedData.preferences.teamSize}
-- Salary Importance: ${formattedData.preferences.salaryImportance}
-
-Experience & Education:
-- Years of Experience: ${formattedData.experience.years}
-- Industries: ${formattedData.experience.industries}
-- Certifications: ${formattedData.experience.certifications}
-    `.trim();
 
     // Create a structured object for the results page
     const resultsData = {
