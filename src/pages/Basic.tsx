@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 import Header from '../components/Header';
 import { useNavigate } from 'react-router-dom';
+import '../styles/shared.css';
 
 interface Question {
   title: string;
@@ -32,7 +33,7 @@ const Basic: React.FC = () => {
     question5: { title: "What motivates you most in a job?", response: "" },
     question6: { title: "Are you open to relocating for a job?", response: "" },
     question7: { title: "Which type of work environment do you prefer?", response: "" },
-    question8: { title: "What’s your current employment status?", response: "" },
+    question8: { title: "What's your current employment status?", response: "" },
     question9: { title: "What are your biggest job search challenges?", response: [] },
     question10: { title: "How soon are you looking to start a new job?", response: "" },
   });
@@ -68,8 +69,7 @@ const Basic: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     toast.success("Basic Questions Completed!", { duration: 3000 });
-    console.log('Basic Assessment Data:', formData);
-    navigate('/results', { state: { formData } }); // Pass formData to Results page
+    navigate('/results', { state: { formData } });
   };
 
   const nextStep = () => setCurrentStep(prev => prev + 1);
@@ -393,33 +393,37 @@ const Basic: React.FC = () => {
   };
 
   return (
-    <div className="page">
+    <div className="career-helpi-app">
       <Header />
-      <div className="assessment-container">
+      <div className="page-container">
         <h2>Basic Career Assessment</h2>
-        <p className="subtitle">Answer these simple questions to begin your career discovery journey.</p>
-        <form onSubmit={handleSubmit} className="assessment-form">
-          <div className="progress-bar">
-            <div className="progress" style={{ width: `${(currentStep / 10) * 100}%` }}></div>
-          </div>
-          {renderStep()}
-          <div className="form-navigation">
-            {currentStep > 1 && (
-              <button type="button" onClick={prevStep} className="nav-button">
-                Previous
-              </button>
-            )}
-            {currentStep < 10 ? (
-              <button type="button" onClick={nextStep} className="nav-button">
-                Next
-              </button>
-            ) : (
-              <button type="submit" className="submit-button">
-                Get Basic Career Suggestions
-              </button>
-            )}
-          </div>
-        </form>
+        <p className="subtitle" style={{ textAlign: 'center', color: '#4a5568', marginBottom: 32 }}>
+          Answer these simple questions to begin your career discovery journey.
+        </p>
+        <div className="card">
+          <form onSubmit={handleSubmit} className="assessment-form">
+            <div className="progress-bar">
+              <div className="progress" style={{ width: `${(currentStep / 10) * 100}%` }}></div>
+            </div>
+            {renderStep()}
+            <div className="form-navigation">
+              {currentStep > 1 && (
+                <button type="button" onClick={prevStep} className="button button-secondary">
+                  Previous
+                </button>
+              )}
+              {currentStep < 10 ? (
+                <button type="button" onClick={nextStep} className="button button-primary">
+                  Next
+                </button>
+              ) : (
+                <button type="submit" className="button button-primary">
+                  Get Basic Career Suggestions
+                </button>
+              )}
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   );

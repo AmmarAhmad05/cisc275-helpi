@@ -1,7 +1,10 @@
 /* Base Styles */
-body {
+html, body {
+  min-height: 100vh;
+  background: #f5f7fa !important;
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   transition: background 0.3s ease, color 0.3s ease;
   overflow-x: hidden;
@@ -245,13 +248,13 @@ body.dark .question-block > strong:hover {
 
 /* Page */
 .page {
-  padding: 40px;
-  max-width: 800px;
-  margin: auto;
-  text-align: center;
-  background: rgba(255,255,255,0.1);
-  border-radius: 12px;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+  min-height: 100vh;
+  width: 100%;
+  padding: 0;
+  background: none;
+  border-radius: 0;
+  box-shadow: none;
+  text-align: initial;
 }
 
 /* Scribble */

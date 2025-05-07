@@ -3,6 +3,7 @@ import toast from 'react-hot-toast';
 import Header from '../components/Header';
 import { useNavigate } from 'react-router-dom';
 import OpenAI from 'openai';
+import '../styles/shared.css';
 
 interface DetailedAssessmentState {
   personality: {
@@ -318,33 +319,37 @@ Experience & Education:
   };
 
   return (
-    <div className="page">
+    <div className="career-helpi-app">
       <Header />
-      <div className="assessment-container">
+      <div className="page-container">
         <h2>Detailed Career Assessment</h2>
-        <p className="subtitle">Take your time to answer these comprehensive questions for personalized career insights.</p>
-        <form onSubmit={handleSubmit} className="assessment-form">
-          <div className="progress-bar">
-            <div className="progress" style={{ width: `${(currentStep / 4) * 100}%` }}></div>
-          </div>
-          {renderStep()}
-          <div className="form-navigation">
-            {currentStep > 1 && (
-              <button type="button" onClick={prevStep} className="nav-button">
-                Previous
-              </button>
-            )}
-            {currentStep < 4 ? (
-              <button type="button" onClick={nextStep} className="nav-button">
-                Next
-              </button>
-            ) : (
-              <button type="submit" className="submit-button">
-                Get Detailed Career Suggestions
-              </button>
-            )}
-          </div>
-        </form>
+        <p className="subtitle" style={{ textAlign: 'center', color: '#4a5568', marginBottom: 32 }}>
+          Take your time to answer these comprehensive questions for personalized career insights.
+        </p>
+        <div className="card">
+          <form onSubmit={handleSubmit} className="assessment-form">
+            <div className="progress-bar">
+              <div className="progress" style={{ width: `${(currentStep / 4) * 100}%` }}></div>
+            </div>
+            {renderStep()}
+            <div className="form-navigation">
+              {currentStep > 1 && (
+                <button type="button" onClick={prevStep} className="button button-secondary">
+                  Previous
+                </button>
+              )}
+              {currentStep < 4 ? (
+                <button type="button" onClick={nextStep} className="button button-primary">
+                  Next
+                </button>
+              ) : (
+                <button type="submit" className="button button-primary">
+                  Get Detailed Career Suggestions
+                </button>
+              )}
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   );
