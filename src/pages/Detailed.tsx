@@ -137,7 +137,44 @@ Experience & Education:
     navigate('/results', { state: { formData: resultsData } });
   };
 
-  const nextStep = () => setCurrentStep(prev => prev + 1);
+  const isStepAnswered = (step: number, formData: DetailedAssessmentState) => {
+    switch (step) {
+      case 1:
+        // All personality traits must be answered (range 1-5, default is 3)
+        return Object.values(formData.personality).every(val => val >= 1 && val <= 5);
+      case 2:
+        // All skills must be answered (range 1-5, default is 3)
+        return Object.values(formData.skills).every(val => val >= 1 && val <= 5);
+      case 3:
+        // All preferences must be answered
+        return (
+          formData.preferences.workHours !== '' &&
+          formData.preferences.workLocation !== '' &&
+          formData.preferences.teamSize !== '' &&
+          formData.preferences.salaryImportance >= 1 &&
+          formData.preferences.salaryImportance <= 5
+        );
+      case 4:
+        // All experience fields must be answered
+        return (
+          formData.experience.years !== '' &&
+          formData.experience.industries.length > 0 &&
+          formData.experience.certifications !== ''
+        );
+      default:
+        return false;
+    }
+  };
+
+  const nextStep = () => {
+    if (!isStepAnswered(currentStep, formData)) {
+      toast.error('Please complete this step to continue.');
+      return;
+    }
+    toast.dismiss();
+    setCurrentStep(prev => prev + 1);
+  };
+
   const prevStep = () => setCurrentStep(prev => prev - 1);
 
   const renderStep = () => {
@@ -271,7 +308,6 @@ Experience & Education:
                 name="experience.years"
                 value={formData.experience.years}
                 onChange={handleChange}
-                //required
               >
                 <option value="">Select an option</option>
                 <option value="0-2">0-2 years</option>
@@ -319,31 +355,49 @@ Experience & Education:
   };
 
   return (
-    <div className="career-helpi-app">
+    <div className="page">
       <Header />
-      <div className="page-container">
-        <h2>Detailed Career Assessment</h2>
-        <p className="subtitle" style={{ textAlign: 'center', color: '#4a5568', marginBottom: 32 }}>
-          Take your time to answer these comprehensive questions for personalized career insights.
-        </p>
-        <div className="card">
-          <form onSubmit={handleSubmit} className="assessment-form">
-            <div className="progress-bar">
-              <div className="progress" style={{ width: `${(currentStep / 4) * 100}%` }}></div>
+      <div className="page-container" style={{ minHeight: '80vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div
+          className="card"
+          style={{
+            maxWidth: 600,
+            width: '100%',
+            margin: '0 auto',
+            background: '#fff',
+            border: '1px solid #e5e7eb',
+            boxShadow: '0 8px 32px rgba(99,102,241,0.10)',
+            borderRadius: 24,
+            padding: '48px 40px',
+            animation: 'fadeInUp 0.8s cubic-bezier(.23,1.01,.32,1) 0.1s both',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          <h2 style={{ fontSize: '2rem', fontWeight: 800, color: '#2c3e50', marginBottom: 8, textAlign: 'center', letterSpacing: '-1px' }}>
+            Detailed Career Assessment
+          </h2>
+          <p style={{ color: '#4a5568', fontSize: '1.18rem', marginBottom: 32, textAlign: 'center', maxWidth: 480 }}>
+            Take your time to answer these comprehensive questions for personalized career insights.
+          </p>
+          <form onSubmit={handleSubmit} className="assessment-form" style={{ width: '100%' }}>
+            <div className="progress-bar" style={{ marginBottom: 32, height: 10, background: '#e5e7eb' }}>
+              <div className="progress" style={{ width: `${(currentStep / 4) * 100}%`, background: 'linear-gradient(90deg, #6366f1 0%, #38bdf8 100%)', height: '100%' }}></div>
             </div>
             {renderStep()}
-            <div className="form-navigation">
+            <div className="form-navigation" style={{ marginTop: 32 }}>
               {currentStep > 1 && (
-                <button type="button" onClick={prevStep} className="button button-secondary">
+                <button type="button" onClick={prevStep} className="button button-secondary" style={{ minWidth: 120 }}>
                   Previous
                 </button>
               )}
               {currentStep < 4 ? (
-                <button type="button" onClick={nextStep} className="button button-primary">
+                <button type="button" onClick={nextStep} className="button button-primary" style={{ minWidth: 120 }}>
                   Next
                 </button>
               ) : (
-                <button type="submit" className="button button-primary">
+                <button type="submit" className="button button-primary" style={{ minWidth: 180 }}>
                   Get Detailed Career Suggestions
                 </button>
               )}
@@ -351,6 +405,12 @@ Experience & Education:
           </form>
         </div>
       </div>
+      <style>{`
+        @keyframes fadeInUp {
+          0% { opacity: 0; transform: translateY(40px); }
+          100% { opacity: 1; transform: translateY(0); }
+        }
+      `}</style>
     </div>
   );
 };
