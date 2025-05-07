@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 import Header from '../components/Header';
 import { useNavigate } from 'react-router-dom';
+import OpenAI from 'openai';
 
 interface DetailedAssessmentState {
   personality: {
@@ -77,13 +78,62 @@ const Detailed: React.FC = () => {
     }
   };
 
-
   // navigate to the result page
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Format the data for OpenAI
+    const formattedData = {
+      personality: Object.entries(formData.personality)
+        .map(([trait, value]) => `${trait}: ${value}/5`)
+        .join('\n'),
+      skills: Object.entries(formData.skills)
+        .map(([skill, value]) => `${skill}: ${value}/5`)
+        .join('\n'),
+      preferences: {
+        workHours: formData.preferences.workHours,
+        workLocation: formData.preferences.workLocation,
+        teamSize: formData.preferences.teamSize,
+        salaryImportance: `${formData.preferences.salaryImportance}/5`
+      },
+      experience: {
+        years: formData.experience.years,
+        industries: formData.experience.industries.join(', '),
+        certifications: formData.experience.certifications
+      }
+    };
+
+    // Create a summary string for OpenAI
+    const summary = `
+Personality Assessment:
+${formattedData.personality}
+
+Skills Assessment:
+${formattedData.skills}
+
+Work Preferences:
+- Work Hours: ${formattedData.preferences.workHours}
+- Work Location: ${formattedData.preferences.workLocation}
+- Team Size: ${formattedData.preferences.teamSize}
+- Salary Importance: ${formattedData.preferences.salaryImportance}
+
+Experience & Education:
+- Years of Experience: ${formattedData.experience.years}
+- Industries: ${formattedData.experience.industries}
+- Certifications: ${formattedData.experience.certifications}
+    `.trim();
+
+    // Create a structured object for the results page
+    const resultsData = {
+      question1: { title: "Personality Assessment", response: formattedData.personality },
+      question2: { title: "Skills Assessment", response: formattedData.skills },
+      question3: { title: "Work Preferences", response: Object.entries(formattedData.preferences).map(([key, value]) => `${key}: ${value}`).join('\n') },
+      question4: { title: "Experience & Education", response: Object.entries(formattedData.experience).map(([key, value]) => `${key}: ${value}`).join('\n') }
+    };
+
     toast.success("Detailed Questions Completed!", { duration: 3000 });
     console.log('Detailed Assessment Data:', formData);
-    navigate('/results');
+    navigate('/results', { state: { formData: resultsData } });
   };
 
   const nextStep = () => setCurrentStep(prev => prev + 1);
