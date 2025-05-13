@@ -24,6 +24,7 @@ const Results: React.FC = () => {
       if (!formData) return;
 
       const savedKey = localStorage.getItem("MYKEY");
+      console.log("Raw saved key from localStorage:", savedKey);
       if (!savedKey) {
         setSuggestions("API key not found. Please enter your key on the home page.");
         console.log("API key not found");
@@ -31,7 +32,17 @@ const Results: React.FC = () => {
         return;
       }
 
-      const apiKey = JSON.parse(savedKey);
+      let apiKey;
+      try {
+        apiKey = JSON.parse(savedKey);
+        console.log("Successfully parsed API key");
+      } catch (e) {
+        console.error("Failed to parse API key:", e);
+        setSuggestions("Error processing API key. Please try entering it again.");
+        setLoading(false);
+        return;
+      }
+
       const openai = new OpenAI({
         apiKey,
         dangerouslyAllowBrowser: true,
@@ -42,6 +53,7 @@ const Results: React.FC = () => {
         .join("\n");
 
       try {
+        console.log("Attempting to fetch suggestions with API key:", apiKey ? "Key exists" : "No key");
         const completion = await openai.chat.completions.create({
           model: "gpt-4o-mini",
           messages: [
@@ -58,9 +70,14 @@ const Results: React.FC = () => {
 
         const message = completion.choices[0].message.content;
         setSuggestions(message || "No suggestions received.");
-      } catch (error) {
+      } catch (error: any) {
         console.error("Failed to fetch career suggestions:", error);
-        setSuggestions("Failed to fetch career suggestions.");
+        console.error("Error details:", {
+          message: error?.message,
+          status: error?.status,
+          type: error?.type
+        });
+        setSuggestions("Failed to fetch career suggestions. Please check the console for details.");
       }
       setLoading(false);
     };
