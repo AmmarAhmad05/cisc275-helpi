@@ -41,15 +41,6 @@ const Settings: React.FC = () => {
         <div className="form-container">
           <form onSubmit={handleSubmit}>
             <div className="form-group">
-              <label>
-                <input
-                  type="checkbox"
-                  name="darkMode"
-                  checked={settings.darkMode}
-                  onChange={handleChange}
-                />
-                Dark Mode
-              </label>
             </div>
 
             <div className="form-group">
