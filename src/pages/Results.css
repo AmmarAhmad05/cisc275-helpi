@@ -1,3 +1,6 @@
+/* ================================
+   General Page Layout
+================================= */
 .results-page {
   min-height: 100vh;
   background-color: #f5f7fa;
@@ -17,12 +20,18 @@
   font-size: 2.5rem;
 }
 
+/* ================================
+   Content Layout & Sections
+================================= */
 .results-content {
   display: flex;
   flex-direction: column;
   gap: 40px;
 }
 
+/* ================================
+   Assessment Summary Section
+================================= */
 .assessment-summary {
   background: white;
   border-radius: 12px;
@@ -60,6 +69,9 @@
   line-height: 1.5;
 }
 
+/* ================================
+   Career Suggestions Section
+================================= */
 .career-suggestions {
   background: white;
   border-radius: 12px;
@@ -91,6 +103,7 @@
   transform: translateY(-5px);
 }
 
+/* Match percentage badge */
 .match-badge {
   position: absolute;
   top: 16px;
@@ -115,6 +128,9 @@
   margin-bottom: 20px;
 }
 
+/* ================================
+   Skills Section Inside Suggestions
+================================= */
 .skills-container h5 {
   color: #2c3e50;
   margin-bottom: 12px;
@@ -135,6 +151,9 @@
   font-size: 0.9rem;
 }
 
+/* ================================
+   States: Loading / No Data
+================================= */
 .loading {
   text-align: center;
   padding: 40px;
@@ -155,6 +174,9 @@
   font-size: 1.2rem;
 }
 
+/* ================================
+   Responsive Design
+================================= */
 @media (max-width: 768px) {
   .results-container {
     padding: 10px;
@@ -168,4 +190,4 @@
   .results-container h2 {
     font-size: 2rem;
   }
-} 
+}

@@ -12,17 +12,10 @@ html, body {
 }
 
 /* Light Theme - Ocean Surface */
-body.light {
+body {
   background: linear-gradient(to bottom, #a2d4f5 0%, #d0f0ff 100%);
   background-attachment: fixed;
   color: #03354f;
-}
-
-/* Dark Theme - Deep Ocean */
-body.dark {
-  background: linear-gradient(to bottom, #022b3a 0%, #053f5e 100%);
-  background-attachment: fixed;
-  color: #e0f7fa;
 }
 
 /* General Button Styles */
@@ -53,27 +46,6 @@ button:hover,
   transform: translateY(-2px);
   background: #ffffff;
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
-}
-
-body.dark button,
-body.dark .tabs button,
-body.dark .nav-button,
-body.dark .submit-button,
-body.dark .footer button,
-body.dark .header-link {
-  background: rgba(255, 255, 255, 0.12);
-  color: #e7e0fa;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-}
-
-body.dark button:hover,
-body.dark .tabs button:hover,
-body.dark .nav-button:hover,
-body.dark .submit-button:hover,
-body.dark .footer button:hover,
-body.dark .header-link:hover {
-  background: rgba(255, 255, 255, 0.2);
-  transform: translateY(-2px);
 }
 
 /* App Container */
@@ -107,11 +79,6 @@ body.dark .header-link:hover {
   margin-right: 20px;
   background: rgba(255, 255, 255, 0.75);
   box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
-}
-
-body.dark .speech-bubble {
-  background: rgba(255, 255, 255, 0.08);
-  color: #e0f7fa;
 }
 
 /* Main Section */
@@ -210,16 +177,6 @@ h1 {
   transform: translateY(-2px);
   background: #ffffff;
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
-}
-
-body.dark .question-block > strong {
-  background: rgba(255, 255, 255, 0.12);
-  color: #e7e0fa;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-}
-
-body.dark .question-block > strong:hover {
-  background: rgba(255, 255, 255, 0.2);
 }
 
 /* Footer */
@@ -338,22 +295,9 @@ textarea {
   font-size: 14px;
 }
 
-body.dark input,
-body.dark select,
-body.dark textarea {
-  background-color: rgba(255, 255, 255, 0.1);
-  color: #e0f7fa;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
 input::placeholder,
 textarea::placeholder {
   color: #888;
-}
-
-body.dark input::placeholder,
-body.dark textarea::placeholder {
-  color: #a5b1c2;
 }
 
 .value-display {
@@ -375,61 +319,6 @@ body.dark textarea::placeholder {
   transition: width 0.3s ease;
 }
 
-/* Toggle Theme Switch */
-.theme-toggle {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  margin-top: 30px;
-  font-weight: 500;
-  font-size: 16px;
-  color: inherit;
-  justify-content: center;
-}
-
-/* Toggle Switch */
-.switch {
-  position: relative;
-  display: inline-block;
-  width: 50px;
-  height: 28px;
-}
-
-.switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0; left: 0;
-  right: 0; bottom: 0;
-  background-color: #ccc;
-  transition: 0.3s;
-  border-radius: 34px;
-}
-
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 20px; width: 20px;
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
-  transition: 0.3s;
-  border-radius: 50%;
-}
-
-input:checked + .slider {
-  background-color: #4caf50;
-}
-
-input:checked + .slider:before {
-  transform: translateX(22px);
-}
-
 /* Floating Bubbles */
 .bubble-float {
   position: absolute;
@@ -443,7 +332,6 @@ input:checked + .slider:before {
   z-index: 0;
   opacity: 0.95;
 }
-
 
 @keyframes floatBubble {
   0% {
@@ -480,10 +368,4 @@ input:checked + .slider:before {
   font-size: 14px;
   text-align: center;
   max-width: 250px;
-}
-
-body.dark .bubble {
-  background: rgba(255, 255, 255, 0.1);
-  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.05), inset 0 0 10px rgba(255, 255, 255, 0.2);
-  color: #e0f7fa;
 }

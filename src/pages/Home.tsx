@@ -1,27 +1,29 @@
-import React, { useState } from 'react';
-import Header from '../components/Header';
-import NavLinks from '../components/NavLinks';
-import QuestionButtons from '../components/QuestionButtons';
-import Footer from '../components/Footer';
-import '../styles/shared.css';
+import React, { useState } from 'react'; // Import React and useState hook
+import Header from '../components/Header'; // Page header
+import NavLinks from '../components/NavLinks'; // Navigation links
+import QuestionButtons from '../components/QuestionButtons'; // Assessment choice buttons
+import Footer from '../components/Footer'; // Page footer
+import '../styles/shared.css'; // Shared styles
 
-// Local storage setup for API key
+// Load stored API key from local storage if it exists
 let keyData = '';
 const saveKeyData = 'MYKEY';
 const prevKey = localStorage.getItem(saveKeyData);
 
 if (prevKey !== null) {
-  keyData = JSON.parse(prevKey);
+  keyData = JSON.parse(prevKey); // Retrieve and parse key from storage
 }
 
 const Home: React.FC = () => {
-  const [key, setKey] = useState<string>(keyData);
+  const [key, setKey] = useState<string>(keyData); // Store API key in state
 
+  // Save key to local storage and reload page
   const handleSubmit = () => {
     localStorage.setItem(saveKeyData, JSON.stringify(key));
     window.location.reload();
   };
 
+  // Handle input change for API key
   const changeKey = (event: React.ChangeEvent<HTMLInputElement>) => {
     setKey(event.target.value);
   };
@@ -36,7 +38,8 @@ const Home: React.FC = () => {
         flexDirection: 'column',
       }}
     >
-      <Header />
+      <Header /> {/* App header */}
+      
       <div
         style={{
           maxWidth: 1300,
@@ -103,7 +106,8 @@ const Home: React.FC = () => {
               Take a personalized assessment and get expert AI guidance to discover the best career path for you.
             </p>
           </div>
-          {/* Hero Illustration/Icon */}
+
+          {/* Hero Illustration */}
           <div style={{ width: 120, height: 120, marginTop: 12, marginBottom: 12 }}>
             <svg width="100%" height="100%" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
               <circle cx="60" cy="60" r="60" fill="#6366f1" fillOpacity="0.12" />
@@ -112,7 +116,8 @@ const Home: React.FC = () => {
             </svg>
           </div>
         </section>
-        {/* Main Card Section */}
+
+        {/* Main Card with buttons and API key form */}
         <div
           className="card"
           style={{
@@ -132,7 +137,9 @@ const Home: React.FC = () => {
             animation: 'fadeInUp 1s cubic-bezier(.23,1.01,.32,1) 0.1s both',
           }}
         >
-          <QuestionButtons />
+          <QuestionButtons /> {/* Component with Basic/Detailed buttons */}
+
+          {/* API Key Input Form */}
           <form
             onSubmit={e => {
               e.preventDefault();
@@ -156,11 +163,14 @@ const Home: React.FC = () => {
           </form>
         </div>
       </div>
+
+      {/* Navigation and Footer */}
       <div style={{ marginTop: 8 }}>
         <NavLinks />
         <Footer />
       </div>
-      {/* Animation keyframes */}
+
+      {/* Animation style */}
       <style>{`
         @keyframes fadeInUp {
           0% { opacity: 0; transform: translateY(40px); }
@@ -171,4 +181,4 @@ const Home: React.FC = () => {
   );
 };
 
-export default Home;
+export default Home; // Export the Home component

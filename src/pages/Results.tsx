@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom'; // Used to access passed route state
 import Header from '../components/Header';
-import OpenAI from 'openai';
-import './Results.css';
+import OpenAI from 'openai'; // OpenAI SDK for fetching suggestions
+import './Results.css'; // Styles for the results page
 
+// Interfaces for form data structure
 interface Question {
   title: string;
   response: string | string[] | number;
@@ -14,17 +15,19 @@ interface BasicAssessmentState {
 }
 
 const Results: React.FC = () => {
-  const location = useLocation();
+  const location = useLocation(); // Access location state passed from the form
   const formData = location.state?.formData as BasicAssessmentState | undefined;
-  const [suggestions, setSuggestions] = useState<string>("");
-  const [loading, setLoading] = useState(true);
+
+  const [suggestions, setSuggestions] = useState<string>(""); // AI-generated suggestions
+  const [loading, setLoading] = useState(true); // Loading state for OpenAI request
 
   useEffect(() => {
     const fetchSuggestions = async () => {
-      if (!formData) return;
+      if (!formData) return; // Exit if form data is missing
 
       const savedKey = localStorage.getItem("MYKEY");
       console.log("Raw saved key from localStorage:", savedKey);
+
       if (!savedKey) {
         setSuggestions("API key not found. Please enter your key on the home page.");
         console.log("API key not found");
@@ -34,7 +37,7 @@ const Results: React.FC = () => {
 
       let apiKey;
       try {
-        apiKey = JSON.parse(savedKey);
+        apiKey = JSON.parse(savedKey); // Parse stored API key
         console.log("Successfully parsed API key");
       } catch (e) {
         console.error("Failed to parse API key:", e);
@@ -43,17 +46,21 @@ const Results: React.FC = () => {
         return;
       }
 
+      // Initialize OpenAI client
       const openai = new OpenAI({
         apiKey,
-        dangerouslyAllowBrowser: true,
+        dangerouslyAllowBrowser: true, // Required for client-side API access
       });
 
+      // Convert form data into a readable summary
       const summary = Object.values(formData)
         .map(q => `${q.title}: ${Array.isArray(q.response) ? q.response.join(", ") : q.response}`)
         .join("\n");
 
       try {
         console.log("Attempting to fetch suggestions with API key:", apiKey ? "Key exists" : "No key");
+
+        // Request career suggestions based on summary
         const completion = await openai.chat.completions.create({
           model: "gpt-4o-mini",
           messages: [
@@ -79,13 +86,13 @@ const Results: React.FC = () => {
         });
         setSuggestions("Failed to fetch career suggestions. Please check the console for details.");
       }
-      setLoading(false);
+      setLoading(false); // Stop loading after fetch
     };
 
-    fetchSuggestions();
+    fetchSuggestions(); // Call the async function
   }, [formData]);
 
-  // Function to parse the suggestions text into sections
+  // Helper function to format AI response into separate cards
   const parseSuggestions = (text: string) => {
     const sections = text.split('\n\n').filter(section => section.trim());
     return sections.map(section => {
@@ -104,6 +111,7 @@ const Results: React.FC = () => {
         
         {formData ? (
           <div className="results-content">
+            {/* Summary of user's answers */}
             <div className="assessment-summary">
               <h3>Your Assessment Summary</h3>
               <div className="summary-cards">
@@ -116,6 +124,7 @@ const Results: React.FC = () => {
               </div>
             </div>
 
+            {/* AI-generated career suggestions */}
             <div className="career-suggestions">
               <h3>Career Path Suggestions</h3>
               {loading ? (
@@ -133,6 +142,7 @@ const Results: React.FC = () => {
             </div>
           </div>
         ) : (
+          // If no form data was passed in
           <div className="no-data">
             <p>No assessment data available. Please complete the assessment first.</p>
           </div>
@@ -142,4 +152,4 @@ const Results: React.FC = () => {
   );
 };
 
-export default Results;
+export default Results; // Export Results page component

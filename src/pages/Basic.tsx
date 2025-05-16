@@ -4,11 +4,20 @@ import Header from '../components/Header';
 import { useNavigate } from 'react-router-dom';
 import '../styles/shared.css';
 
+/**
+ * Interface representing a single question in the assessment
+ * @property {string} title - The question text displayed to the user
+ * @property {string | string[] | number} response - The user's answer(s) to the question
+ */
 interface Question {
   title: string;
   response: string | string[] | number;
 }
 
+/**
+ * Interface representing the complete state of the basic assessment form
+ * Contains all 10 questions that make up the basic career assessment
+ */
 interface BasicAssessmentState {
   question1: Question;
   question2: Question;
@@ -22,9 +31,20 @@ interface BasicAssessmentState {
   question10: Question;
 }
 
+/**
+ * Basic Career Assessment Component
+ * 
+ * This component handles a 10-step career assessment questionnaire.
+ * It manages form state, multi-step navigation, validation, and submission.
+ */
 const Basic: React.FC = () => {
+  // Navigation hook to redirect after form submission
   const navigate = useNavigate();
+  
+  // Current step in the multi-step form (1-10)
   const [currentStep, setCurrentStep] = useState(1);
+  
+  // Form data state with initial values for all 10 questions
   const [formData, setFormData] = useState<BasicAssessmentState>({
     question1: { title: "Do you currently have a job?", response: "" },
     question2: { title: "What is your highest level of education completed?", response: "" },
@@ -38,6 +58,10 @@ const Basic: React.FC = () => {
     question10: { title: "How soon are you looking to start a new job?", response: "" },
   });
 
+  /**
+   * Handles input changes for standard form controls (text inputs, selects, etc.)
+   * Updates the corresponding question's response in the form state
+   */
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({
@@ -46,6 +70,10 @@ const Basic: React.FC = () => {
     }));
   };
 
+  /**
+   * Handles checkbox changes for questions with multiple possible answers
+   * Adds or removes values from the response array based on checkbox state
+   */
   const handleMultipleChoiceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, checked } = e.target;
     setFormData(prev => {
@@ -66,12 +94,20 @@ const Basic: React.FC = () => {
     });
   };
 
+  /**
+   * Processes form submission
+   * Shows a success toast and navigates to results page with form data
+   */
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     toast.success("Basic Questions Completed!", { duration: 3000 });
     navigate('/results', { state: { formData } });
   };
 
+  /**
+   * Advances to the next step if current step is valid
+   * Shows error toast if validation fails
+   */
   const nextStep = () => {
     if (!isStepAnswered(currentStep, formData)) {
       toast.error('Please select an option to continue.');
@@ -81,8 +117,20 @@ const Basic: React.FC = () => {
     setCurrentStep(prev => prev + 1);
   };
 
+  /**
+   * Returns to the previous step in the form
+   * No validation required for backward navigation
+   */
   const prevStep = () => setCurrentStep(prev => prev - 1);
 
+  /**
+   * Validates if the current step has been answered correctly
+   * Each question type has its own validation logic
+   * 
+   * @param step - Current step number (1-10)
+   * @param formData - Current state of the form
+   * @returns boolean indicating if the step is valid
+   */
   const isStepAnswered = (step: number, formData: BasicAssessmentState) => {
     switch (step) {
       case 1:
@@ -110,6 +158,14 @@ const Basic: React.FC = () => {
     }
   };
 
+  /**
+   * Renders the appropriate form step based on currentStep
+   * Returns different form UI components for each question type:
+   * - Radio buttons for yes/no questions
+   * - Dropdowns for single-select questions
+   * - Checkboxes for multi-select questions
+   * - Number input for scale questions
+   */
   const renderStep = () => {
     switch (currentStep) {
       case 1:
@@ -383,10 +439,13 @@ const Basic: React.FC = () => {
             Answer these simple questions to begin your career discovery journey.
           </p>
           <form onSubmit={handleSubmit} className="assessment-form" style={{ width: '100%' }}>
+            {/* Progress bar shows completion percentage based on current step */}
             <div className="progress-bar" style={{ marginBottom: 32, height: 10, background: '#e5e7eb' }}>
               <div className="progress" style={{ width: `${(currentStep / 10) * 100}%`, background: 'linear-gradient(90deg, #6366f1 0%, #38bdf8 100%)', height: '100%' }}></div>
             </div>
+            {/* Dynamic form step content based on currentStep state */}
             {renderStep()}
+            {/* Navigation buttons - conditionally rendered based on current step */}
             <div className="form-navigation" style={{ marginTop: 32 }}>
               {currentStep > 1 && (
                 <button type="button" onClick={prevStep} className="button button-secondary" style={{ minWidth: 120 }}>
@@ -406,6 +465,7 @@ const Basic: React.FC = () => {
           </form>
         </div>
       </div>
+      {/* CSS animation for fade-in effect when component mounts */}
       <style>{`
         @keyframes fadeInUp {
           0% { opacity: 0; transform: translateY(40px); }

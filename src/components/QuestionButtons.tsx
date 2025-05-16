@@ -1,11 +1,15 @@
 import React from 'react';
+// Hook to navigate between pages programmatically
 import { useNavigate } from 'react-router-dom';
+// Import shared styles (assumed to include button/card classes)
 import '../styles/shared.css';
 
+// Define the QuestionButtons component
 const QuestionButtons: React.FC = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate(); // Initialize navigation function
 
   return (
+    // Outer card container with inline styles for layout and design
     <div
       className="card"
       style={{
@@ -23,13 +27,44 @@ const QuestionButtons: React.FC = () => {
         padding: '40px 32px',
       }}
     >
-      <h2 style={{ fontSize: '1.45rem', fontWeight: 600, color: '#222', marginBottom: 6, textAlign: 'center', letterSpacing: '-0.5px' }}>
+      {/* Title for the assessment section */}
+      <h2
+        style={{
+          fontSize: '1.45rem',
+          fontWeight: 600,
+          color: '#222',
+          marginBottom: 6,
+          textAlign: 'center',
+          letterSpacing: '-0.5px',
+        }}
+      >
         Start Your Assessment
       </h2>
-      <p style={{ color: '#888', fontSize: '1.05rem', marginBottom: 24, textAlign: 'center', fontWeight: 400, lineHeight: 1.6 }}>
+
+      {/* Subtext providing more context to the user */}
+      <p
+        style={{
+          color: '#888',
+          fontSize: '1.05rem',
+          marginBottom: 24,
+          textAlign: 'center',
+          fontWeight: 400,
+          lineHeight: 1.6,
+        }}
+      >
         Choose a quick or detailed assessment to get personalized career insights.
       </p>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 18, width: '100%' }}>
+
+      {/* Button container for layout */}
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 18,
+          width: '100%',
+        }}
+      >
+        {/* Button that navigates to the basic questions form */}
         <button
           onClick={() => navigate('/basic')}
           className="button"
@@ -50,6 +85,8 @@ const QuestionButtons: React.FC = () => {
         >
           Basic Questions
         </button>
+
+        {/* Button that navigates to the detailed questions form */}
         <button
           onClick={() => navigate('/detailed')}
           className="button"
@@ -75,4 +112,4 @@ const QuestionButtons: React.FC = () => {
   );
 };
 
-export default QuestionButtons;
+export default QuestionButtons; // Export the component for use in other files

@@ -1,4 +1,6 @@
-/* Common page layout */
+/* ===============================
+   Page Layout
+================================= */
 .page {
   min-height: 100vh;
   background-color: #f5f7fa;
@@ -23,7 +25,9 @@
   font-weight: 600;
 }
 
-/* Card styles */
+/* ===============================
+   Card Elements
+================================= */
 .card {
   background: white;
   border-radius: 12px;
@@ -51,7 +55,9 @@
   margin-bottom: 16px;
 }
 
-/* Form styles */
+/* ===============================
+   Form Styling
+================================= */
 .form-container {
   background: white;
   border-radius: 12px;
@@ -94,7 +100,9 @@
   box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
 }
 
-/* Button styles */
+/* ===============================
+   Button Styling
+================================= */
 .button {
   padding: 14px 28px;
   border: none;
@@ -131,7 +139,9 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
-/* Progress bar */
+/* ===============================
+   Progress Bar
+================================= */
 .progress-bar {
   width: 100%;
   height: 8px;
@@ -147,7 +157,9 @@
   transition: width 0.3s ease;
 }
 
-/* Navigation */
+/* ===============================
+   Navigation Controls
+================================= */
 .form-navigation {
   display: flex;
   justify-content: space-between;
@@ -155,7 +167,9 @@
   gap: 16px;
 }
 
-/* Range input styling */
+/* ===============================
+   Range Input Styling
+================================= */
 input[type="range"] {
   width: 100%;
   height: 8px;
@@ -190,7 +204,9 @@ input[type="range"]::-webkit-slider-thumb:hover {
   font-size: 1.1rem;
 }
 
-/* FAQ styles */
+/* ===============================
+   FAQ Section
+================================= */
 .faq-item {
   margin-bottom: 24px;
   padding-bottom: 24px;
@@ -210,7 +226,9 @@ input[type="range"]::-webkit-slider-thumb:hover {
   font-weight: 600;
 }
 
-/* List styles */
+/* ===============================
+   List Styling
+================================= */
 ol, ul {
   padding-left: 24px;
   margin-bottom: 16px;
@@ -222,7 +240,9 @@ ol li, ul li {
   margin-bottom: 8px;
 }
 
-/* Checkbox and radio styles */
+/* ===============================
+   Checkbox & Radio Inputs
+================================= */
 input[type="checkbox"],
 input[type="radio"] {
   margin-right: 8px;
@@ -231,38 +251,40 @@ input[type="radio"] {
   cursor: pointer;
 }
 
-/* Responsive design */
+/* ===============================
+   Responsive Design
+================================= */
 @media (max-width: 768px) {
   .page-container {
     padding: 20px 16px;
   }
-  
+
   .page-container h2 {
     font-size: 2rem;
     margin-bottom: 24px;
   }
-  
+
   .card {
     padding: 24px;
     margin-bottom: 24px;
   }
-  
+
   .form-container {
     padding: 24px;
   }
-  
+
   .form-navigation {
     flex-direction: column;
     gap: 12px;
   }
-  
+
   .button {
     width: 100%;
     padding: 12px 24px;
   }
-  
+
   .faq-item {
     margin-bottom: 20px;
     padding-bottom: 20px;
   }
-} 
+}
